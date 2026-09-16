@@ -1,0 +1,23 @@
+body { padding: 0; margin: 0 }
+#unity-container { position: absolute }
+#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
+/* 모바일 브라우저(특히 주소창이 열렸다 닫혔다 하는 Chrome/Safari)에서 100%/100vh는 주소창이 숨겨진
+   "최대" 높이를 기준으로 계산돼, 실제 보이는 화면보다 캔버스가 더 크게 잡히는 경우가 있다. 그 결과
+   화면 하단(더보기 메뉴, 하단 탭 등)이 주소창 뒤로 밀려 잘리거나, 실제 터치 좌표와 캔버스 좌표가
+   어긋나 버튼이 안 눌리는 문제가 생긴다. 100dvh(동적 뷰포트 높이)를 쓰면 주소창 표시 상태에 맞춰
+   실시간으로 갱신되어 이 문제가 사라진다. dvh 미지원 구형 브라우저를 위해 100%를 그대로 남겨 폴백으로 쓴다. */
+#unity-container.unity-mobile { position: fixed; width: 100%; height: 100%; height: 100dvh }
+.unity-mobile #unity-fullscreen-container { width: 100%; height: 100%; height: 100dvh }
+#unity-fullscreen-container { position: relative; }
+#unity-canvas { position: absolute; width: 100%; height: 100%; background: #1F1F20 }
+#unity-loading-container { position: absolute; width: 100%; height: 100%; backdrop-filter: blur(5px); display: none; }
+#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+#unity-logo { width: 154px; height: 154px; background: url('app-icon.png') no-repeat center / contain; border-radius: 28px; }
+#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
+#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
+#unity-footer { position: relative }
+.unity-mobile #unity-footer { display: none }
+#unity-logo-title-footer { float:left; width: 102px; height: 38px; background: url('unity-logo-title-footer.png') no-repeat center }
+#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
+#unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
+#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
