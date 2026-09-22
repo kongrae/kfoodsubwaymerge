@@ -1,4 +1,9 @@
 body { padding: 0; margin: 0 }
+/* 브라우저 기본 더블탭 확대/탭 지연을 끈다. 없으면 화면이 바뀐 직후의 첫 탭이 브라우저의 더블탭
+   판정에 걸려 씹히고, 사용자는 같은 버튼을 두 번 눌러야 하는 것처럼 느낀다(iOS Safari는
+   user-scalable=no를 무시하고 더블탭 확대를 계속 시도하는 것으로 알려져 있다). */
+html, body { touch-action: manipulation }
+#unity-canvas { touch-action: none }
 #unity-container { position: absolute }
 #unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
 /* 모바일 브라우저(특히 주소창이 열렸다 닫혔다 하는 Chrome/Safari)에서 100%/100vh는 주소창이 숨겨진
