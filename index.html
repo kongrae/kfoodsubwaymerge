@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="utf-8">
@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <!-- 吏湲??ㅼ젣濡??꾩썙吏??섏씠吏媛 理쒖떊 鍮뚮뱶?몄? ?덉쑝濡?諛붾줈 ?뺤씤?섎젮怨??ｌ? 踰꾩쟾 ?쒖떆(紐⑤컮?쇱뿉?쒕룄
-         蹂댁씠寃?unity-footer 諛뽰뿉 蹂꾨룄濡??붾떎). rebuild-and-deploy.ps1??諛고룷???뚮쭏??20260924165750??         ?ㅼ젣 ??꾩뒪?ы봽濡?移섑솚?쒕떎 ???щ같???꾩뿉???쏅궇 ?붾㈃??蹂댁씤?ㅻ㈃ ???レ옄媛 洹몃?濡쒖씤吏遺???뺤씤. -->
-    <div id="build-version-tag" style="position:fixed;left:4px;bottom:4px;z-index:9999;color:#fff;background:rgba(0,0,0,0.55);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:11px;font-weight:bold;line-height:1.4;pointer-events:none;">build 20260925015753</div>
+    <!-- 지금 실제로 띄워진 페이지가 최신 빌드인지 눈으로 바로 확인하려고 넣은 버전 표시(모바일에서도
+         보이게 unity-footer 밖에 별도로 둔다). rebuild-and-deploy.ps1이 배포할 때마다 20260924181520을
+         실제 타임스탬프로 치환한다 — 재배포 후에도 옛날 화면이 보인다면 이 숫자가 그대로인지부터 확인. -->
+    <div id="build-version-tag" style="position:fixed;left:4px;bottom:4px;z-index:9999;color:#fff;background:rgba(0,0,0,0.55);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:11px;font-weight:bold;line-height:1.4;pointer-events:none;">build 20260925031726</div>
     <div id="unity-container" class="unity-desktop">
       <div id="unity-fullscreen-container">
         <canvas id="unity-canvas" width="960" height="600" tabindex="-1"></canvas>
@@ -61,12 +62,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL.loader.js?v=20260925015753";
+      var loaderUrl = buildUrl + "/WebGL.loader.js?v=20260925031726";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/WebGL.data.unityweb?v=20260925015753",
-        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb?v=20260925015753",
-        codeUrl: buildUrl + "/WebGL.wasm.unityweb?v=20260925015753",
+        dataUrl: buildUrl + "/WebGL.data.unityweb?v=20260925031726",
+        frameworkUrl: buildUrl + "/WebGL.framework.js.unityweb?v=20260925031726",
+        codeUrl: buildUrl + "/WebGL.wasm.unityweb?v=20260925031726",
         streamingAssetsUrl: "StreamingAssets",
 
         // If you have a custom web site structure, or want to place multiple Unity build instances on the same page,
