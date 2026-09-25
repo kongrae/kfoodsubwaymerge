@@ -1,0 +1,17 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>떡볶이 아트 비교</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6eedb;color:#283f3a;font:16px/1.6 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:32px 18px}h1{font-size:28px;margin:0}p{margin:8px 0 22px}label{display:block;margin:16px 0}.sheet{background:#fffaf0;border:1px solid #dccfaf;border-radius:20px;padding:20px;margin:18px 0;overflow:auto}.row{display:grid;grid-template-columns:repeat(6,minmax(86px,1fr));gap:10px;min-width:570px}.cell{text-align:center}.tile{width:var(--size,61px);height:var(--size,61px);display:inline-flex;align-items:center;justify-content:center;background:#d7eade;border-radius:12px}.original{width:100%;height:100%;background-image:url('foods.png');background-size:400% 400%;background-repeat:no-repeat}.pilot{width:100%;height:100%;object-fit:contain}.name{font-size:12px;margin:8px 0 2px}.tag{display:inline-block;border-radius:16px;background:#dcece3;padding:4px 12px;font-size:12px}button,a{color:#fff;background:#20897b;border:0;border-radius:12px;padding:10px 16px;font:inherit;text-decoration:none;display:inline-block}input{vertical-align:middle;width:220px}.note{font-size:14px;color:#52645c}h2{font-size:18px;margin:0 0 18px}.sample{display:flex;gap:18px;flex-wrap:wrap}.sample img{width:180px;background:#d7eade;border-radius:18px}
+</style><main>
+<span class="tag">아트 비교용 · 실제 게임 진행 화면 아님</span><h1>같은 메뉴, 두 가지 제작 방식</h1><p>밝기보다 작은 크기에서 단계가 구분되는지, 옆 체인과 어울리는지 확인합니다.</p>
+<label>아이콘 크기 <input id="size" type="range" min="44" max="120" value="61"> <output id="value">61px</output></label>
+<section class="sheet"><h2>A · 현재 적용된 아트</h2><div class="row" id="a"></div></section>
+<section class="sheet"><h2>B · Blender 제작 후보</h2><div class="row" id="b"></div></section>
+<p class="note">양쪽 모두 같은 칸 크기입니다. 접시 안의 음식 크기와 여백도 함께 비교하세요. 후보는 일반 저장의 기본 아트를 교체하지 않습니다.</p>
+<div class="sample"><img src="tteok-2.png" alt="Blender 컵 떡볶이"><img src="tteok-4.png" alt="Blender 달걀 떡볶이"><img src="tteok-6.png" alt="Blender 모둠 떡볶이"></div>
+<p><a href="../index.html?diagnostic=1">A 실제 머지 비교</a> <a href="../index.html?diagnostic=1&art=blender">B 실제 머지 비교</a></p>
+<p class="note">실제 머지 비교는 임시 진단 저장을 사용합니다. 에너지·재고 조건은 일반 게임의 경제 평가에 사용하지 않습니다.</p>
+<script>
+const names=['한입 떡볶이','컵 떡볶이','접시 떡볶이','달걀 떡볶이','치즈 떡볶이','모둠 떡볶이'];
+names.forEach((name,i)=>{document.querySelector('#a').insertAdjacentHTML('beforeend',`<div class="cell"><div class="tile"><div class="original" style="background-position:${i%4*100/3}% ${Math.floor(i/4)*100/3}%"></div></div><div class="name">${i+1} · ${name}</div></div>`);document.querySelector('#b').insertAdjacentHTML('beforeend',`<div class="cell"><div class="tile"><img class="pilot" src="tteok-${i+1}.png" alt="${name}"></div><div class="name">${i+1} · ${name}</div></div>`)});
+document.querySelector('#size').addEventListener('input',e=>{document.documentElement.style.setProperty('--size',e.target.value+'px');document.querySelector('#value').textContent=e.target.value+'px'});
+</script></main></html>
