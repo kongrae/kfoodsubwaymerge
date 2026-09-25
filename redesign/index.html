@@ -21,14 +21,14 @@
   <canvas id="unity-canvas" tabindex="0" aria-label="우리 동네 포장마차 머지 게임"></canvas>
   <section class="cover" id="loading"><h1>우리 동네 포장마차</h1><p>우리 골목에 따뜻한 한 끼를.</p><progress id="progress" max="1" value="0"></progress><p id="load-message">음식을 준비하고 있어요.</p></section>
   <section class="cover" id="size-help" hidden><h1>세로로 플레이해 주세요</h1><p>음식과 손님 메뉴가 잘 보이도록<br>창을 넓히거나 휴대폰을 세워 주세요.</p><p>권장 최소 화면: 360 × 640</p></section>
-  <small id="version" hidden>RD-20260925042501</small>
+  <small id="version" hidden>RD-20260925044412</small>
 </main>
 <script>
   const canvas=document.querySelector('#unity-canvas'), loading=document.querySelector('#loading');
-  function fit(){const r=document.querySelector('#game').getBoundingClientRect();document.querySelector('#size-help').hidden=r.width>=360&&Math.min(r.width/6,(r.height-336*r.width/390)/7)>=44;}
+  function fit(){const r=document.querySelector('#game').getBoundingClientRect();document.querySelector('#size-help').hidden=r.width>=360&&Math.min(r.width/6,(r.height-272*r.width/390)/7)>=44;}
   window.addEventListener('resize',fit); if(window.visualViewport)window.visualViewport.addEventListener('resize',fit); fit();
   if(new URLSearchParams(location.search).get('diagnostic')==='1')document.querySelector('#version').hidden=false;
-  const buildUrl='Build', version='RD-20260925042501', cache='?v='+encodeURIComponent(version);
+  const buildUrl='Build', version='RD-20260925044412', cache='?v='+encodeURIComponent(version);
   const config={
     dataUrl:buildUrl+'/Redesign.data.unityweb'+cache,
     frameworkUrl:buildUrl+'/Redesign.framework.js.unityweb'+cache,
