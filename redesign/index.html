@@ -5,13 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7edd3">
   <title>낭만포차 · 체험판</title>
+  <link rel="preload" as="image" type="image/webp" href="Loading/pocha-loading.webp?v=1" fetchpriority="high">
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e8eee5}
     body{height:100dvh;display:flex;justify-content:center;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:system-ui,sans-serif;color:#334b49}
     main{position:relative;width:min(100%,430px);height:100%;background:#f7edd3}
     canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
     .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;background:#f7edd3;z-index:2}
-    h1{font-size:28px;margin:0 0 12px}p{line-height:1.7;margin:8px 0}progress{width:220px;height:14px;accent-color:#25877a}
+    h1{font-size:28px;margin:0 0 12px}p{line-height:1.7;margin:8px 0}
+    #loading{display:block;padding:0;overflow:hidden;isolation:isolate;background:linear-gradient(#f7dcbd,#f7eed4 45%,#cfb686);opacity:1;transition:opacity .22s ease}
+    #loading.leaving{opacity:0;pointer-events:none}
+    .loading-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2}
+    .loading-light{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,246,222,.22),transparent 34%,transparent 73%,rgba(77,66,39,.16));pointer-events:none}
+    .loading-brand{position:absolute;top:8%;left:8%;width:84%;color:#375c4d}
+    .loading-kicker{font-size:12px;font-weight:750;letter-spacing:.12em;margin:0 0 10px;text-shadow:0 1px 5px #fff3d4}
+    .loading-title{margin:0 auto;width:100%;max-width:340px;line-height:1}
+    .loading-title img{display:block;width:100%;height:auto;filter:drop-shadow(0 4px 5px rgba(120,77,32,.12))}
+    .loading-tagline{margin:10px 0 0;font-size:14px;font-weight:650;letter-spacing:.025em;text-shadow:0 1px 5px #fff3d4}
+    .loading-card{position:absolute;bottom:24px;left:20px;right:20px;max-width:350px;margin:0 auto;padding:17px 18px 14px;border:2px solid #fff9e5;border-radius:24px;background:rgba(255,248,225,.97);box-shadow:0 4px 0 rgba(146,110,61,.55),0 12px 30px rgba(70,51,31,.16);text-align:left}
+    .loading-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+    #load-message{margin:0;color:#365b4e;font-size:14px;font-weight:750;line-height:1.4;word-break:keep-all}
+    #load-percent{font-size:12px;font-weight:800;color:#527868;font-variant-numeric:tabular-nums;flex:none}
+    #progress{display:block;width:100%;height:15px;overflow:hidden;border:2px solid #aac5ac;border-radius:20px;background:#dae5cb;box-shadow:inset 0 2px 3px #94b59b;appearance:none;accent-color:#529c82}
+    #progress::-webkit-progress-bar{background:#dae5cb;border-radius:20px;box-shadow:inset 0 2px 3px #aac2a0}
+    #progress::-webkit-progress-value{border-radius:20px;background:linear-gradient(#9ed3a9 0%,#62b392 42%,#418970 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);transition:width .18s ease}
+    #progress::-moz-progress-bar{border-radius:20px;background:linear-gradient(#9ed3a9,#62b392 42%,#418970)}
+    #load-hint{font-size:11px;line-height:1.5;color:#66745b;margin:9px 0 0;text-align:center;word-break:keep-all}
+    #load-retry{width:100%;min-height:46px;margin:12px 0 2px;padding:9px 14px;border:2px solid #fff3d9;border-radius:15px;background:linear-gradient(#ef9270,#df694a);box-shadow:0 3px 0 #b75138;color:#fff9ec;font:750 15px system-ui,sans-serif;cursor:pointer}
+    #load-retry:active{transform:translateY(2px);box-shadow:0 1px 0 #b75138}
+    #load-retry:focus-visible{outline:3px solid #315b50;outline-offset:3px}
+    #loading.failed .loading-row{margin-bottom:0}
+    @media(max-height:680px){.loading-brand{top:7%}.loading-kicker{margin-bottom:6px;font-size:11px}.loading-tagline{margin-top:5px;font-size:13px}.loading-card{bottom:18px;padding:13px 16px 11px}}
+    @media(prefers-reduced-motion:reduce){#loading,#progress::-webkit-progress-value{transition:none}}
     #size-help{z-index:3} [hidden]{display:none!important}
     #version{position:absolute;right:5px;bottom:1px;font-size:8px;opacity:.6;pointer-events:none}
   </style>
@@ -19,12 +44,53 @@
 <body>
 <main id="game">
   <canvas id="unity-canvas" tabindex="0" aria-label="낭만포차 머지 게임"></canvas>
-  <section class="cover" id="loading"><h1>낭만포차</h1><p>우리 골목에 따뜻한 한 끼를.</p><progress id="progress" max="1" value="0"></progress><p id="load-message">음식을 준비하고 있어요.</p></section>
+  <section class="cover" id="loading" data-loading-version="LOAD-20260930-01" aria-label="게임 불러오기" aria-busy="true">
+    <img class="loading-art" src="Loading/pocha-loading.webp?v=1" width="941" height="1672" alt="" fetchpriority="high" decoding="async">
+    <div class="loading-light" aria-hidden="true"></div>
+    <header class="loading-brand">
+      <p class="loading-kicker">따뜻한 한 끼, 새로운 인연</p>
+      <h1 class="loading-title"><img src="Loading/pocha-title.svg?v=1" alt="낭만포차" width="348" height="111"></h1>
+      <p class="loading-tagline">오늘도, 당신의 골목에서.</p>
+    </header>
+    <div class="loading-card">
+      <div class="loading-row"><p id="load-message" role="status" aria-live="polite">가게를 준비하고 있어요</p><span id="load-percent" aria-hidden="true">0%</span></div>
+      <progress id="progress" max="1" value="0" aria-label="게임 다운로드 진행률"></progress>
+      <p id="load-hint">같은 음식을 합쳐 손님에게 드려요.</p>
+      <button id="load-retry" type="button" hidden>다시 불러오기</button>
+    </div>
+  </section>
   <section class="cover" id="size-help" hidden><h1>세로로 플레이해 주세요</h1><p>음식과 손님 메뉴가 잘 보이도록<br>창을 넓히거나 휴대폰을 세워 주세요.</p><p>권장 최소 화면: 360 × 640</p></section>
   <small id="version" hidden>RD-20260930130832</small>
 </main>
 <script>
   const canvas=document.querySelector('#unity-canvas'), loading=document.querySelector('#loading');
+  const progress=document.querySelector('#progress'), percent=document.querySelector('#load-percent');
+  const message=document.querySelector('#load-message'), hint=document.querySelector('#load-hint'), retry=document.querySelector('#load-retry');
+  let loadFailed=false, progressValue=0, hideTimer;
+  const slowTimer=setTimeout(()=>{if(!loadFailed&&!loading.hidden)hint.textContent='첫 방문에는 준비가 조금 더 걸릴 수 있어요.';},20000);
+  function setProgress(value){
+    if(loadFailed||!Number.isFinite(value))return;
+    // A completed download is not yet a running game. Show 100 only after Unity resolves.
+    progressValue=Math.max(progressValue,Math.min(.99,Math.max(0,value)));
+    progress.value=progressValue; percent.textContent=Math.floor(progressValue*100)+'%';
+    const next=progressValue>=.9?'가게 문을 열고 있어요':'맛있는 음식을 준비하고 있어요';
+    if(message.textContent!==next)message.textContent=next;
+  }
+  function loadingError(detail){
+    loadFailed=true; clearTimeout(slowTimer); clearTimeout(hideTimer);
+    loading.hidden=false; loading.classList.remove('leaving'); loading.classList.add('failed'); loading.setAttribute('aria-busy','false');
+    progress.hidden=true; percent.hidden=true; retry.hidden=false;
+    message.textContent='불러오지 못했어요'; hint.textContent='연결 상태를 확인하고 다시 시도해 주세요.';
+    console.error(detail);
+  }
+  function loadingReady(){
+    if(loadFailed)return;
+    clearTimeout(slowTimer); progress.value=1; percent.textContent='100%'; message.textContent='가게가 준비됐어요';
+    loading.setAttribute('aria-busy','false'); loading.classList.add('leaving');
+    const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    hideTimer=setTimeout(()=>{if(!loadFailed){loading.hidden=true;canvas.focus();}},reduced?0:220);
+  }
+  retry.addEventListener('click',()=>window.location.reload());
   function fit(){const r=document.querySelector('#game').getBoundingClientRect();document.querySelector('#size-help').hidden=r.width>=360&&Math.min(r.width/6,(r.height-220*r.width/390)/7)>=44;}
   window.addEventListener('resize',fit); if(window.visualViewport)window.visualViewport.addEventListener('resize',fit); fit();
   if(new URLSearchParams(location.search).get('diagnostic')==='1')document.querySelector('#version').hidden=false;
@@ -38,11 +104,14 @@
     productName:"낭만포차",
     productVersion:"1.0",
     devicePixelRatio:Math.min(window.devicePixelRatio||1,2),
-    showBanner:(message,type)=>{if(type==='error'){loading.hidden=false;document.querySelector('#load-message').textContent='불러오지 못했어요. 새로고침해서 다시 시도해 주세요.';console.error(message);}}
+    showBanner:(message,type)=>{if(type==='error')loadingError(message);}
   };
   const script=document.createElement('script');script.src=buildUrl+'/Redesign.loader.js'+cache;
-  script.onload=()=>createUnityInstance(canvas,config,value=>document.querySelector('#progress').value=value).then(instance=>{loading.hidden=true;canvas.focus();}).catch(error=>{loading.hidden=false;document.querySelector('#load-message').textContent='불러오지 못했어요. 새로고침해서 다시 시도해 주세요.';console.error(error);});
-  script.onerror=()=>{document.querySelector('#load-message').textContent='연결을 확인한 뒤 새로고침해 주세요.';};document.body.appendChild(script);
+  script.onload=()=>{
+    try{Promise.resolve(createUnityInstance(canvas,config,setProgress)).then(loadingReady).catch(loadingError);}
+    catch(error){loadingError(error);}
+  };
+  script.onerror=()=>loadingError('Unity loader request failed');document.body.appendChild(script);
 </script>
 </body>
 </html>
