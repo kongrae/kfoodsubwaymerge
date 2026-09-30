@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7edd3">
   <title>낭만포차 · 체험판</title>
-  <link rel="preload" as="image" type="image/webp" href="Loading/pocha-loading.webp?v=1" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="Loading/pocha-loading.webp?v=2" fetchpriority="high">
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e8eee5}
     body{height:100dvh;display:flex;justify-content:center;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:system-ui,sans-serif;color:#334b49}
@@ -16,10 +16,10 @@
     #loading{display:block;padding:0;overflow:hidden;isolation:isolate;background:linear-gradient(#f7dcbd,#f7eed4 45%,#cfb686);opacity:1;transition:opacity .22s ease}
     #loading.leaving{opacity:0;pointer-events:none}
     .loading-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2}
-    .loading-light{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,246,222,.22),transparent 34%,transparent 73%,rgba(77,66,39,.16));pointer-events:none}
+    .loading-light{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,251,241,.10),transparent 26%);pointer-events:none}
     .loading-brand{position:absolute;top:8%;left:8%;width:84%;color:#375c4d}
     .loading-kicker{font-size:12px;font-weight:750;letter-spacing:.12em;margin:0 0 10px;text-shadow:0 1px 5px #fff3d4}
-    .loading-title{margin:0 auto;width:100%;max-width:340px;line-height:1}
+    .loading-title{margin:0 auto;width:100%;max-width:310px;line-height:1}
     .loading-title img{display:block;width:100%;height:auto;filter:drop-shadow(0 4px 5px rgba(120,77,32,.12))}
     .loading-tagline{margin:10px 0 0;font-size:14px;font-weight:650;letter-spacing:.025em;text-shadow:0 1px 5px #fff3d4}
     .loading-card{position:absolute;bottom:24px;left:20px;right:20px;max-width:350px;margin:0 auto;padding:17px 18px 14px;border:2px solid #fff9e5;border-radius:24px;background:rgba(255,248,225,.97);box-shadow:0 4px 0 rgba(146,110,61,.55),0 12px 30px rgba(70,51,31,.16);text-align:left}
@@ -44,8 +44,8 @@
 <body>
 <main id="game">
   <canvas id="unity-canvas" tabindex="0" aria-label="낭만포차 머지 게임"></canvas>
-  <section class="cover" id="loading" data-loading-version="LOAD-20260930-01" aria-label="게임 불러오기" aria-busy="true">
-    <img class="loading-art" src="Loading/pocha-loading.webp?v=1" width="941" height="1672" alt="" fetchpriority="high" decoding="async">
+  <section class="cover" id="loading" data-loading-version="LOAD-20261001-02" aria-label="게임 불러오기" aria-busy="true">
+    <img class="loading-art" src="Loading/pocha-loading.webp?v=2" width="941" height="1672" alt="" fetchpriority="high" decoding="async">
     <div class="loading-light" aria-hidden="true"></div>
     <header class="loading-brand">
       <p class="loading-kicker">따뜻한 한 끼, 새로운 인연</p>
@@ -60,7 +60,7 @@
     </div>
   </section>
   <section class="cover" id="size-help" hidden><h1>세로로 플레이해 주세요</h1><p>음식과 손님 메뉴가 잘 보이도록<br>창을 넓히거나 휴대폰을 세워 주세요.</p><p>권장 최소 화면: 360 × 640</p></section>
-  <small id="version" hidden>RD-20260930130832</small>
+  <small id="version" hidden>RD-20260930151600</small>
 </main>
 <script>
   const canvas=document.querySelector('#unity-canvas'), loading=document.querySelector('#loading');
@@ -94,7 +94,7 @@
   function fit(){const r=document.querySelector('#game').getBoundingClientRect();document.querySelector('#size-help').hidden=r.width>=360&&Math.min(r.width/6,(r.height-220*r.width/390)/7)>=44;}
   window.addEventListener('resize',fit); if(window.visualViewport)window.visualViewport.addEventListener('resize',fit); fit();
   if(new URLSearchParams(location.search).get('diagnostic')==='1')document.querySelector('#version').hidden=false;
-  const buildUrl='Build', version='RD-20260930130832', cache='?v='+encodeURIComponent(version);
+  const buildUrl='Build', version='RD-20260930151600', cache='?v='+encodeURIComponent(version);
   const config={
     dataUrl:buildUrl+'/Redesign.data.unityweb'+cache,
     frameworkUrl:buildUrl+'/Redesign.framework.js.unityweb'+cache,
