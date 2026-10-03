@@ -3,33 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f7edd3">
+  <meta name="theme-color" content="#fdf9f0">
   <title>낭만포차 · 체험판</title>
-  <link rel="preload" as="image" type="image/webp" href="Loading/pocha-loading.webp?v=2" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="Loading/pocha-loading.webp?v=3" fetchpriority="high">
   <style>
-    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e8eee5}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#a6c6ce}
     body{height:100dvh;display:flex;justify-content:center;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:system-ui,sans-serif;color:#334b49}
-    main{position:relative;width:min(100%,430px);height:100%;background:#f7edd3}
+    main{position:relative;width:min(100%,430px);height:100%;background:#fdf9f0}
     canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
-    .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;background:#f7edd3;z-index:2}
+    .cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;background:#fdf9f0;z-index:2}
     h1{font-size:28px;margin:0 0 12px}p{line-height:1.7;margin:8px 0}
     #loading{display:block;padding:0;overflow:hidden;isolation:isolate;background:linear-gradient(#f7dcbd,#f7eed4 45%,#cfb686);opacity:1;transition:opacity .22s ease}
     #loading.leaving{opacity:0;pointer-events:none}
     .loading-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2}
     .loading-light{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,251,241,.10),transparent 26%);pointer-events:none}
-    .loading-brand{position:absolute;top:8%;left:8%;width:84%;color:#375c4d}
+    .loading-brand{position:absolute;top:8%;left:8%;width:84%;color:#164f5b}
     .loading-kicker{font-size:12px;font-weight:750;letter-spacing:.12em;margin:0 0 10px;text-shadow:0 1px 5px #fff3d4}
     .loading-title{margin:0 auto;width:100%;max-width:310px;line-height:1}
     .loading-title img{display:block;width:100%;height:auto;filter:drop-shadow(0 4px 5px rgba(120,77,32,.12))}
     .loading-tagline{margin:10px 0 0;font-size:14px;font-weight:650;letter-spacing:.025em;text-shadow:0 1px 5px #fff3d4}
-    .loading-card{position:absolute;bottom:24px;left:20px;right:20px;max-width:350px;margin:0 auto;padding:17px 18px 14px;border:2px solid #fff9e5;border-radius:24px;background:rgba(255,248,225,.97);box-shadow:0 4px 0 rgba(146,110,61,.55),0 12px 30px rgba(70,51,31,.16);text-align:left}
+    .loading-card{position:absolute;bottom:24px;left:20px;right:20px;max-width:350px;margin:0 auto;padding:17px 18px 14px;border:2px solid #fff9e5;border-radius:24px;background:rgba(255,252,243,.98);box-shadow:0 4px 0 rgba(146,110,61,.55),0 12px 30px rgba(70,51,31,.16);text-align:left}
     .loading-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
-    #load-message{margin:0;color:#365b4e;font-size:14px;font-weight:750;line-height:1.4;word-break:keep-all}
-    #load-percent{font-size:12px;font-weight:800;color:#527868;font-variant-numeric:tabular-nums;flex:none}
-    #progress{display:block;width:100%;height:15px;overflow:hidden;border:2px solid #aac5ac;border-radius:20px;background:#dae5cb;box-shadow:inset 0 2px 3px #94b59b;appearance:none;accent-color:#529c82}
-    #progress::-webkit-progress-bar{background:#dae5cb;border-radius:20px;box-shadow:inset 0 2px 3px #aac2a0}
-    #progress::-webkit-progress-value{border-radius:20px;background:linear-gradient(#9ed3a9 0%,#62b392 42%,#418970 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);transition:width .18s ease}
-    #progress::-moz-progress-bar{border-radius:20px;background:linear-gradient(#9ed3a9,#62b392 42%,#418970)}
+    #load-message{margin:0;color:#164f5b;font-size:14px;font-weight:750;line-height:1.4;word-break:keep-all}
+    #load-percent{font-size:12px;font-weight:800;color:#34616a;font-variant-numeric:tabular-nums;flex:none}
+    #progress{display:block;width:100%;height:15px;overflow:hidden;border:2px solid #82acb5;border-radius:20px;background:#dae9eb;box-shadow:inset 0 2px 3px #94b59b;appearance:none;accent-color:#176573}
+    #progress::-webkit-progress-bar{background:#dae9eb;border-radius:20px;box-shadow:inset 0 2px 3px #aac2a0}
+    #progress::-webkit-progress-value{border-radius:20px;background:linear-gradient(#7cbbc2 0%,#348c9c 42%,#176573 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);transition:width .18s ease}
+    #progress::-moz-progress-bar{border-radius:20px;background:linear-gradient(#7cbbc2,#348c9c 42%,#176573)}
     #load-hint{font-size:11px;line-height:1.5;color:#66745b;margin:9px 0 0;text-align:center;word-break:keep-all}
     #load-retry{width:100%;min-height:46px;margin:12px 0 2px;padding:9px 14px;border:2px solid #fff3d9;border-radius:15px;background:linear-gradient(#ef9270,#df694a);box-shadow:0 3px 0 #b75138;color:#fff9ec;font:750 15px system-ui,sans-serif;cursor:pointer}
     #load-retry:active{transform:translateY(2px);box-shadow:0 1px 0 #b75138}
@@ -44,8 +44,8 @@
 <body>
 <main id="game">
   <canvas id="unity-canvas" tabindex="0" aria-label="낭만포차 머지 게임"></canvas>
-  <section class="cover" id="loading" data-loading-version="LOAD-20261001-02" aria-label="게임 불러오기" aria-busy="true">
-    <img class="loading-art" src="Loading/pocha-loading.webp?v=2" width="941" height="1672" alt="" fetchpriority="high" decoding="async">
+  <section class="cover" id="loading" data-loading-version="LOAD-20261003-01" aria-label="게임 불러오기" aria-busy="true">
+    <img class="loading-art" src="Loading/pocha-loading.webp?v=3" width="941" height="1672" alt="" fetchpriority="high" decoding="async">
     <div class="loading-light" aria-hidden="true"></div>
     <header class="loading-brand">
       <p class="loading-kicker">따뜻한 한 끼, 새로운 인연</p>
@@ -60,7 +60,7 @@
     </div>
   </section>
   <section class="cover" id="size-help" hidden><h1>세로로 플레이해 주세요</h1><p>음식과 손님 메뉴가 잘 보이도록<br>창을 넓히거나 휴대폰을 세워 주세요.</p><p>권장 최소 화면: 360 × 640</p></section>
-  <small id="version" hidden>RD-20261001112820</small>
+  <small id="version" hidden>RD-20261003143346</small>
 </main>
 <script>
   const canvas=document.querySelector('#unity-canvas'), loading=document.querySelector('#loading');
@@ -94,7 +94,7 @@
   function fit(){const r=document.querySelector('#game').getBoundingClientRect();document.querySelector('#size-help').hidden=r.width>=360&&Math.min(r.width/6,(r.height-220*r.width/390)/7)>=44;}
   window.addEventListener('resize',fit); if(window.visualViewport)window.visualViewport.addEventListener('resize',fit); fit();
   if(new URLSearchParams(location.search).get('diagnostic')==='1')document.querySelector('#version').hidden=false;
-  const buildUrl='Build', version='RD-20261001112820', cache='?v='+encodeURIComponent(version);
+  const buildUrl='Build', version='RD-20261003143346', cache='?v='+encodeURIComponent(version);
   const config={
     dataUrl:buildUrl+'/Redesign.data.unityweb'+cache,
     frameworkUrl:buildUrl+'/Redesign.framework.js.unityweb'+cache,
